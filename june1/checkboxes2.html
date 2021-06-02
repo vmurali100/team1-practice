@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="languages">Languages : </label><br>
+    <input type="checkbox" name="languages" id="" value="Telugu" >Telugu <br>
+    <input type="checkbox" name="languages" id="" value="English">English<br>
+    <input type="checkbox" name="languages" id="" value="Hindi">Hindi<br>
+    <input type="checkbox" name="languages" id="" value="Kanada">Kanada<br>
+    <button onclick="getlanguages()" type="button">Get Languages</button>
+    </form>
+    <div></div>
+    <script>
+            var selectedlanguages=[];
+            var alllangauges=document.getElementsByName("languages");
+        function getlanguages(){
+            selectedlanguages=[];
+            alllangauges.forEach(function(element){
+                if(element.checked){
+                    selectedlanguages.push(element.value);
+                }
+                // console.log(element)
+                
+            });
+            displaylanguages();
+            resetform()
+        }
+        function displaylanguages(){
+            document.querySelector("div").innerHTML="";
+            var results="";
+            selectedlanguages.forEach(function(val){
+             results=results+val+"<br>";   
+            });
+            document.querySelector("div").innerHTML=results;
+        }
+
+        function resetform(){
+            alllangauges.forEach(function(element){
+              element.checked=false;
+            });
+        }
+    </script>
+</body>
+</html>

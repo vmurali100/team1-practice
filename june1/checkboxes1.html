@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <form>
+    <label for="subject">Subjects : </label> <br>
+    <input type="checkbox" name="subject" id="" value="Html">Html<br>
+    <input type="checkbox" name="subject" id="" value="CSS">CSS<br>
+    <input type="checkbox" name="subject" id="" value="Javascript">Javascript<br>
+    <input type="checkbox" name="subject" id="" value="Reactjs">Reactjs<br>
+    <button onclick="getsubject()"type="button">Get Subjects</button>
+  </form>
+  <div></div>
+  <script>
+      var selectedvalues=[];
+       var mysub=document.getElementsByName("subject");
+      function getsubject(){
+        selectedvalues=[];
+         
+          mysub.forEach(function(element){
+            //   console.log(element);
+            //   console.log(element.checked);
+              if(element.checked){
+                  selectedvalues.push(element.value);
+              
+              }
+          });
+          displaysubjects();
+          resetform();
+      }
+
+      function displaysubjects(){
+        document.querySelector("div").innerHTML="";
+        
+          var results="";
+       selectedvalues.forEach(function(val) {
+           results=results+val+"<br> "  ;      
+       });
+       document.querySelector("div").innerHTML=results;
+      }
+      function resetform(){
+        mysub.forEach(function(element){
+            element.checked=false;
+        })
+      }
+  </script>
+</body>
+</html>
