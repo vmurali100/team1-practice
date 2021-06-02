@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asynchronous API</title>
+</head>
+<body>
+    <p>Displaying <quote>API</quote> data in browser as well as console in javascript</p>
+
+    <div id="demo">
+            <!-- <p>Click to get info</p> -->
+            <button type="button" onclick="getDATA()">Get API</button>
+   </div>
+   
+  
+  
+<script>
+        var Users=[]
+        function getDATA(){
+            var getData=new XMLHttpRequest;
+            getData.onreadystatechange=function(){
+                if(this.readyState==4 && this.status==200){
+                    console.log(JSON.parse(getData.response))
+                    document.getElementById("demo").innerHTML=this.responseText
+                   }
+                
+            }
+            getData.open("GET","http://www.filltext.com/?rows=5&fname=%7BfirstName%7D&lname=%7BlastName%7D&pretty=true",true)
+            getData.send()
+           
+        }
+
+        // getDATA()
+    </script>
+    
+</body>
+</html>

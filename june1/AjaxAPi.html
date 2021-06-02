@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Consumption</title>
+</head>
+<body>
+    <h1>Displaying <quote>API</quote> data in table</h1>
+    <table border="1">
+        <thead>
+            <tr><th>Fname</th>
+                <th>Lname</th>
+                <th>Tel</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>state</th>
+                <th>Zip</th></tr>
+        </thead>
+        <tbody id="myTbody"></tbody>
+    </table>
+    
+    <script>
+        let Users=[]
+        function getDataFromServer(){
+          var  getData=new XMLHttpRequest();
+          getData.onreadystatechange=function(){
+              if(getData.readyState == 4 && getData.status == 200){
+                  console.log(JSON.parse(getData.response))
+                  Users=JSON.parse(getData.response);
+                  displayUser()        
+                }
+
+          }
+          getData.open("GET","http://www.filltext.com/?rows=10&fname={firstName}&lname={lastName}&tel={phone|format}&address={streetAddress}&city={city}&state={usState|abbr}&zip={zip}&pretty=true")
+          getData.send()
+        }
+
+        function displayUser(){
+            for(i=0;i<Users.length;i++){
+                var myTr=document.createElement("tr")
+                for(a in Users[i]){
+                    var myTd=document.createElement("td")
+                    myTd.innerHTML=Users[i][a]
+                    myTr.appendChild(myTd)
+                }
+                document.getElementById("myTbody").appendChild(myTr)
+            }
+        }
+
+        getDataFromServer()
+    </script>
+
+</body>
+</html>
