@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="demo"></h1>
+    <script>
+        //array
+        var person =["12","15","14","16","18"]
+
+        //FILTER method create a new array based on condition 
+     var displayData = person.filter(id=>id>14);
+     console.log(displayData)
+        //output: ["15","16","18"]
+
+        //MAP method create a new array by manipulating the values in another aarray.
+    var displayData = person.map(person1=>'$'+person1);
+    console.log(displayData)
+        // output: ["$12", "$15", "$14", "$16", "$18"]
+
+        //FOREACH applies a function each item in an array
+    var displayData = person.forEach(person=>console.log(person))
+        //output:12
+               //15
+               //14
+               //16
+               //18
+
+        //SOME applies on an array it check  
+    var displayData =person.some(person=>person =='12')
+    console.log(displayData)
+        //output:true
+
+        //EVERY, it is similar to the some() but checks if all items in an array pass to condition 
+    var displayData = person.every(person=>person >= 12);
+    console.log(displayData)
+        //output: condition == >= 15  it display  output as "false"
+        //output: condition == >= 12 it display output as "true"
+
+        //push it push the value at end of the array
+    document.getElementById("demo").innerHTML = person.push("123")
+    document.getElementById("demo").innerHTML = person
+        //output:12,15,14,16,18,123
+
+        //pop method delete the value at the end of the array
+    document.getElementById("demo").innerHTML = person.pop()
+    document.getElementById("demo").innerHTML = person
+        //12,15,14,16,18
+        
+        //unshift method add the value at the starting of the array
+    document.getElementById("demo").innerHTML = person.unshift("199")
+    document.getElementById("demo").innerHTML = person
+        //output:199,12,15,14,16,18
+
+        //shift method delete the value at the starting of the array
+    document.getElementById("demo").innerHTML = person.shift()
+    document.getElementById("demo").innerHTML = person
+        //output:12,15,14,16,18
+
+        //tostring it conver array to string
+    document.getElementById("demo").innerHTML = person.toString()
+    document.getElementById("demo").innerHTML = person
+
+        //splice perform 3 operation add remove replace
+    document.getElementById("demo").innerHTML = person.splice(2, 0,"155");
+    document.getElementById("demo").innerHTML = person
+        //output:12,15,155,14,16,18
+
+        //slice method select the portion of the place
+    document.getElementById("demo").innerHTML = person.slice(2,4);
+    document.getElementById("demo").innerHTML = person
+       //output:155,14
+    </script>
+</body>
+</html>
