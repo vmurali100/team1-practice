@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width:600px;
+        }
+        .container{
+            height: 100vh;
+            display: flex;
+            align-items: center;
+
+        }
+        #img1{
+            width: 400px;
+        }
+        .container1{
+            height: 170vh;
+            display: grid;
+            place-items: center;
+        }
+        #img2{
+            width: 400px;
+            height: 200px;
+        }
+        #img3{
+            max-width:200px;
+            /* width: 200px; */  /* here both width and height optional */
+            /* height:100px; */
+            position:fixed;
+        }
+    </style>
+</head>
+<body>
+    //1.img with absolute position
+    <div>
+    <img src="house.jpg">
+    </div>
+    
+    //2.img with flex property
+    <div class="container">
+        <img id="img1" src="rose.jpg">
+    </div>
+
+
+    //3.img with grid property
+    <div class="container1">
+        <img id="img2" src="wwww.png" height="100px" >
+    </div>
+    
+    
+   <div class="container2">
+       <img id="img3" src="house.jpg">
+   </div>
+</body>
+</html>
