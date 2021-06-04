@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Clone Methods</title>
+</head>
+<body>
+    <h1>Spread Method</h1>
+    <p>Check in Console</p>
+    <ul id="myul"></ul>
+    <script>
+        var fruits={
+            topic:"Spread Method",
+            Banana:"Yellow",
+            Papaya:"green",
+        }
+        var refruits={...fruits}
+        // document.write(refruits)
+        // document.getElementById("myul").innerHTML=fruits
+        console.log(refruits)
+    </script>
+    <br>
+    <h1>Object.Assign Method</h1>
+    <p>Check in Console</p>
+    <script>
+        var fruits={
+            
+            topic:"Object.assign method",
+            Banana:"Yellow",
+            Papaya:"Green",
+        }
+        var Refruits=Object.assign({},fruits)
+        // the empty {} as the first argument, this will ensure you don't mutate the original object
+        console.log(Refruits)
+    </script> <br>
+     <h1>JSON Method</h1>
+     <p>Check in Console</p>
+     <script>
+         var cars={
+             topic:"JSON method",
+             name:"ford",
+             varient:"petrol",
+         }
+         var newcars=JSON.parse(JSON.stringify(cars))
+         console.log(newcars)
+     </script>
+
+</body>
+</html>
