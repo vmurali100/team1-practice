@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="text">NAME : </label><br>
+        <input type="text" name="" id="uname"><br>
+       <label for="text">USERNAME :</label><br>
+       <input type="text" name="" id="myuser"><br>
+       <label for="text">PASSWORD : </label><br>
+       <input type="text" name="" id="upass"><br>
+       <label for="test">SHORTBIO : </label><br>
+       <input type="text" name="" id="bio"><br><br>
+      
+    </form>
+    <button type="button" onclick="submit()" >SUBMIT</button>
+    <div id="demo"></div>
+    <script>
+        function submit(){
+            var person={
+            Name:document.getElementById("uname").value,
+            Username:document.getElementById("uname").value,
+            Password:document.getElementById("upass").value,
+            shortbio:document.getElementById("bio").value
+           
+        }
+        var results=""
+        for (a in person){
+        results=results+person[a]+"<br>"    
+        }    
+        document.getElementById("demo").innerHTML=results;    
+        }
+      
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Data From Local</title>
+</head>
+<body>
+    <button onclick="getdata()" type="button">Get Data</button>
+    <script>
+        function getdata(){
+            var info=new XMLHttpRequest();
+            info.onreadystatechange=function(){
+                if(info.readyState==4 && info.status==200){
+                    console.log(info.response);
+                }
+            };
+            // info.open("GET","../Data/users.json")//data from local//
+            info.open("GET","http://www.filltext.com/?rows=10&id={index}&email={email}&username={username}&password={randomString|5}&pretty=true")
+            info.send();
+        }
+    </script>
+</body>
+</html>

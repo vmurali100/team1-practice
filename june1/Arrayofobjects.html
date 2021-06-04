@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo"></div>
+    <script>
+        var users=[
+            {
+            fname:"Hemanth",
+            lname:"Reddy",
+            email:"hemanth07329",
+            city:"Tirupathi",
+            state:"AP"  
+        },
+        {
+         fname:"Murali",
+         lname:"Krishna",
+        email:"murali@gmail.com",
+        city:"chittoor" ,
+        state:"AP"  
+         },
+         {
+             fname:"Gagan",
+             lname:"Reddy",
+             email:"gagan@gmail.com",
+             city:"Bangalore",
+             state:"Karnataka" 
+         }
+        ]
+
+        var results=""
+        users.forEach(function(user) {
+            results=results+user.fname+"<br>"+user.lname+"<br><br>"
+        //   for(a in user){
+        //       results=results+user[a]+"<br>";
+              
+        //   } 
+        //   results=results+"<br>"
+         
+        });
+        document.getElementById("demo").innerHTML=results; 
+    </script>
+</body>
+</html>
