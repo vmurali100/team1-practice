@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM </title>
+    <style>
+        button:hover{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1 class="dispy">DOM-Document Object Model</h1>
+        <p class="dispy"> some of the Methods <br>   -Document.getElementById <br>
+            -Document.getElementsByClassName <br>
+            -Document.getElementsByTagName <br>
+         </p>
+        <h2 class="dispy" >Click the button </h2>
+        <button  onclick="display()">Visit</button>
+    </div>
+    <script>
+        function display(){
+            var text=document.querySelectorAll(".dispy");
+            for(i=0;i<text.length;i++){
+                text[i].style.color="blue"
+                 }
+        }
+        </script> <hr>
+        <div>
+            <h1>Call Back</h1>
+            <script>
+                function first(){
+                    document.write("Call back 1")
+                }
+
+                function second(){
+                    document.write("Call back 2")
+                }
+                // second(first);
+                 first(second)
+            </script>
+        </div> <hr>
+        <div>
+            <h1>Promise</h1>
+            <script>
+                function getData(){
+                    return new Promise(function(success,failure){
+                    // success()
+                    failure()
+                    }) };
+
+                    getData().then(function(){
+                        document.write("Returning Success")
+                    })
+
+                    .catch(function(){
+                        document.write("Returning failure")
+                    })
+            </script> <hr>
+            <div>
+                <h1>Async And Await -wait for 3 secs </h1>
+                <p id="demo"></p>
+                <script>
+                   async function Data(){
+                        let mypromise=new Promise(function(success,failure){
+                            // success("Hello success")
+                            setTimeout(function(){
+                                success("Hi User");},3000);
+                            })
+                             document.getElementById("demo").innerHTML= await mypromise
+                    }
+                   Data()
+                </script>
+                 
+            </div>
+             
+        </div>
+</body>
+</html>
