@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <style>
+        #updateuserbtn{
+        display:none;
+    }
+   </style>
+</head>
+<body>
+    <form>
+     <label for="fname">FIRSTNAME : </label>
+    <input type="text" name="" id="fname"><br><br>
+    <label for="lname">LASTNAME : </label>
+    <input type="text" name="" id="lname"><br><br>
+    <button onclick="createuser()" type="button" id="createuserbtn">CREATE USER</button>
+    <button onclick="updateuser()"type="button" id="updateuserbtn">UPDATE USER</button>
+    </form>
+    <ul></ul>
+</body>
+<script>
+    var users=[];
+    var index;
+    // 1.Creating a User
+    function createuser() {
+        var user={
+            fname:document.getElementById("fname").value,
+            lname:document.getElementById("lname").value
+        }
+        console.log(user) 
+        PostingDataToServer(user);       
+    }
+    // 2.Read All Users
+    function getallusersfromserver(){
+     var info=new XMLHttpRequest();
+     info.onreadystatechange=function(){
+         if(info.readyState==4 && info.status==200){
+             console.log(JSON.parse(info.response));
+             users=JSON.parse(info.response)
+             displayallusers();
+         }
+     }   
+     info.open("GET","http://localhost:3000/Users");
+     info.send();
+    }
+    getallusersfromserver();
+
+    function displayallusers(){
+        document.querySelector("ul").innerHTML="";
+        users.forEach(function(user , i) {
+         var myli=document.createElement("li")
+         myli.innerHTML=user.fname+""+user.lname + 
+         " <button onclick='deleteuser("+i+")'>DELETE</button> <button onclick='edituser("+i+")'>EDIT</button> "  
+         document.querySelector("ul").appendChild(myli)
+        });
+    }
+    // 3.Edit User
+    function edituser(i){
+        index=i;
+      document.getElementById("fname").value=users[i].fname;
+      document.getElementById("lname").value=users[i].lname; 
+      showandhidebtns(true)
+    }
+    function updateuser(){
+        var newusers={
+            fname:document.getElementById("fname").value,
+            lname:document.getElementById("lname").value,
+           
+        }
+        var info=new XMLHttpRequest;
+        info.onreadystatechange=function(){
+            if(info.status==200 && info.readyState==4){
+                getallusersfromserver();
+                showandhidebtns(false);
+            }
+        };
+        info.open("PUT","http://localhost:3000/Users/"+users[index].id);
+        info.setRequestHeader("content-type","application/json");
+        info.send(JSON.stringify(newusers));
+    }
+    // 4.Deleting A User
+    function deleteuser(i){
+        console.log(users[i]);
+        var info=new XMLHttpRequest();
+        info.onreadystatechange=function(){
+            if(info.status==200 && info.readyState==4){
+                displayallusers();
+            }
+        };
+        info.open("DELETE","http://localhost:3000/Users/"+users[i].id);
+        info.send();
+    }
+
+    function PostingDataToServer(user) {
+        var info=new XMLHttpRequest();
+        info.onreadystatechange=function(){
+            if(info.readyState==4 && info.status==201){
+                console.log("Added user successfully")
+            }
+        }
+        info.open("POST","http://localhost:3000/Users");
+        info.setRequestHeader("content-type","application/json");
+        info.send(JSON.stringify(user));
+        
+    }
+    function showandhidebtns(val){
+        if(val==true){
+            document.getElementById("updateuserbtn").style.display="block";
+            document.getElementById("createuserbtn").style.display="none";
+        }else{
+            document.getElementById("updateuserbtn").style.display="none";
+            document.getElementById("createuserbtn").style.display="block";
+        }
+
+    }
+</script>
+</html>

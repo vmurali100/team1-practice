@@ -1,0 +1,34 @@
+{
+  "Users": [
+    {
+      "fname": "Dinesh",
+      "lname": "Kumar",
+      "id": 3
+    },
+    {
+      "fname": "Gagan",
+      "lname": "Reddy M",
+      "id": 4
+    },
+    {
+      "fname": "sai",
+      "lname": "prathap",
+      "id": 5
+    },
+    {
+      "fname": "Murali",
+      "lname": "Krishna Solutions",
+      "id": 6
+    },
+    {
+      "fname": "Hemanth",
+      "lname": "Reddy",
+      "id": 7
+    },
+    {
+      "fname": "Jaideep ",
+      "lname": "Reddy",
+      "id": 9
+    }
+  ]
+}
