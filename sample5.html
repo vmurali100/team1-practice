@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <table id="" style="border: 1px solid; font-family: Arial;">
+        <tr>
+            <td>First Number</td>
+            <td><input type="number"  id="txtFirstNum"></td>
+        </tr>
+        <tr>
+            <td>Second Number</td>
+            <td><input type="number"  id="txtSecNum"></td>
+        </tr>
+        <tr>
+            <td>Result</td>
+            <td><input type="number" value="result" id="result"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="button" value="Add" onclick="addNum()"></td>
+        </tr>
+
+         </table>
+    </form>
+
+    <script>
+        function addNum(){
+            var firstNumber=document.getElementById("txtFirstNum").value
+            var secondNumber=document.getElementById("txtSecNum").value
+
+            document.getElementById("result").value=firstNumber+secondNumber;
+        }
+    </script>
+</body>
+</html>
