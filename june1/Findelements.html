@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Elements -JS</title>
+</head>
+<body>
+   <p> <blockquote>Ways to search elements in array (JS)</blockquote></p><br>
+    <h1>find() method</h1>
+    <script>
+        var user=[10,12,16,18,20]
+        //  finds the greater  value next to the passed value 
+        var value = user.find(val=>val>16)
+        // returns the first element that passed the condition
+         console.log(value)
+        document.write(value)
+    </script>
+    <hr>
+    <h1>findIndex() method</h1>
+    <!-- returns the index position of number which is next to  number 18 -->
+    <script>
+        var data=[10,12,16,18,20]
+        var index=data.findIndex(val=>val>18)
+        document.write(index)
+    </script> <hr>
+    <h1>includes() method</h1>
+    <!-- this method willl return true or false by checking the passed value in the given array -->
+    <script>
+        var info=["CSK","KKR","MI","RCB"]
+         var value=info.includes("SRH")
+         document.write(value)
+    </script><hr>
+     <h1>indexOf() method</h1>
+     <!-- returns the position of element in array -->
+     <script>
+         var info=["CSK","KKR","MI","RCB"]
+          var value=info.indexOf("CSK")
+          document.write(value)
+     </script><hr>
+    
+    <h1>lastIndexOf() method</h1>
+    <!-- it shows the index position of last repeated element in array -->
+    <script>
+        var details=["CSK","KKR","MI","RCB","CSK","MI"]
+        var user=details.lastIndexOf("MI")
+        // var user=details.indexOf("MI")
+        document.write(user)
+    </script><hr>
+    <h1>filter() method</h1>
+    <!-- it eliminates the unwanted elements in array bassed on condition   -->
+    <script>
+        var marks=[25,35,55,65,75]
+        var pass=marks.filter(val=>val>=55)
+        document.write(pass)
+    </script>
+</body>
+</html>
