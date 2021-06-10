@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+    <link rel="stylesheet" href="Telegramlogin.css">
+    <!-- <style>
+        div#divtext{
+            height: 100vh;
+            display: grid;
+            place-items: center;
+        }
+    </style> -->
+</head>
+<body>
+    <div>
+        <img  src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png" alt="Telegram logo">
+    </div>
+    <div id="divtext">
+        <h3>Connecting...</h3>
+        <h4>Please Confirm your country code and enter your phone number.</h4>
+        <label for="country">Country</label><br>
+        <select name="countrys" id="count"  >
+            <option value="india">India</option>
+            <option value="america">Amerika</option>
+            <option value="malaysiya">malaysiya</option>
+        </select><br><br>
+        <label for="number">phone Number</label><br>
+        <input id="num" type="number" placeholder="Enter your mobile number"><br><br>
+         <input type="checkbox">
+         <label id="ct" for="text">keep me singed in</label><br><br>
+         <button onclick="login()" type="button">login In </button>
+        
+    </div>
+    
+    <script>
+        function login(){
+            var person=
+                userinfo();
+                clearForm(person);
+                console.log(person)
+            
+        }
+        function userinfo(){
+            var person={
+                count:"",
+                num:""
+            
+            }
+            person. num=document.getElementById("num").value
+                person. count=document.getElementById("count").value
+            return(person)
+        }
+        function clearForm(person){
+            for(a in person){
+                if(a == "num" || a== "count"){
+                    document.getElementById(a).value=""
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>
