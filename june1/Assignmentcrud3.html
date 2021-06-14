@@ -1,0 +1,204 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div#d1{
+            border: 1px solid white;
+            width: 500px;
+            margin: 100px 0px 0px 500px;
+            padding: 50px;
+            background-image: url(https://analyticsindiamag.com/wp-content/uploads/2020/10/7d744a684fe03ebc7e8de545f97739dd.jpg);
+           z-index: 20px;
+        }
+
+    </style>
+</head>
+<body> 
+    <div id="d1">
+    <form>
+        <label for="fname">Name :</label>
+        <input type="text" id="fname" onkeyup="checkvalue()">
+        <br><br>
+        <label for="gender">Gender</label><br>
+        <input type="radio" value="male" name="gender">Male
+        <input type="radio" value="female" name="gender">Female
+        <br><br>
+        <label for="cities">Cities</label>
+        <input type="checkbox" name="cities" value="bangalore">bangalore <br>
+        <input type="checkbox" name="cities" value="pune">Amaravathi <br>
+        <input type="checkbox" name="cities" value="hyderabad">Hyderabad <br>
+        <input type="checkbox" name="cities" value="chennai">Chennai <br>
+        <input type="checkbox" name="cities" value="mumbai">mumbai <br>
+        <input type="checkbox" name="cities" value="cochin">Cochin 
+        <br><br>
+        <label for="states">states</label>
+        <select name="states" id="states">
+            <option value=""></option>
+            <option value="telangana">Telangana</option>
+            <option value="mumbai">Mumbai</option>
+            <option value="karnataka">Karnataka</option>
+            <option value="tamilNade">TamilNadu</option>
+            <option value="kerala">Kerala</option>
+            <option value="andhraPradesh">AndhraPradesh</option>
+       
+        </select> 
+             
+        <br><br>
+        
+        <button disabled  type="button" onclick="addUser()" id="addBtn">Add User</button>
+        <button type="button" style="display: none;"  onclick="updateUser()" id="updateBtn">Update</button>
+    </form>
+</div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>fname</th>
+                <th>gender</th>
+                <th>cities</th>
+                <th>states</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="userTable"></tbody>
+    </table>
+
+    <script>
+         var rbuttons=document.getElementsByName("gender")
+         var allCheckBoxes=document.getElementsByName("cities")
+        function checkvalue(){
+            var checkName=document.getElementById("fname").value
+            if(checkName.length >=7){
+                document.querySelector("button").removeAttribute("disabled")
+            }else{
+                document.querySelector("button").setAttribute("disabled", true)
+             }
+            console.log(checkName)
+        }
+
+        var users=[];
+             function addUser(){
+                var person=setUserFormInfo();
+                users.push(person);
+               clearForm(person);
+               displayUserTable();
+                
+        }
+        function setUserFormInfo(){
+            var person={
+                   fname:"",
+                   gender:"",
+                }
+             person.fname=document.getElementById("fname").value
+           for(i=0;i<rbuttons.length;i++){
+               if(rbuttons[i].checked == true){
+                   person.gender=rbuttons[i].value
+               }
+               }
+              var checkedValues=[];
+               for(i=0;i<allCheckBoxes.length;i++){
+                   if(allCheckBoxes[i].checked == true){
+                       checkedValues.push(allCheckBoxes[i].value)
+                   }
+               }
+               person.cities=checkedValues;
+              
+               person.states=document.getElementById("states").value
+             
+               return person
+
+        }
+
+        function displayUserTable(){
+            document.getElementById("userTable").innerHTML="";
+            for(i=0;i<users.length;i++){
+                var myTr=document.createElement("tr")
+                for(a in users[i]){
+                    var  myTd=document.createElement("td")
+                    myTd.innerHTML=users[i][a]
+                    myTr.appendChild(myTd)
+                }
+                document.getElementById("userTable").appendChild(myTr)
+
+                var editTd=document.createElement("td")
+                var editBtn=document.createElement("button")
+                editBtn.innerHTML="Edit"
+                editBtn.setAttribute("onclick","editUser("+i+")")
+                editTd.appendChild(editBtn)
+                 myTr.appendChild(editTd)
+
+                var delTd=document.createElement("td")
+                var delBtn=document.createElement("button")
+                delBtn.innerHTML="Delete"
+                delBtn.setAttribute("onclick", "deleteUser("+i+")")
+                delTd.appendChild(delBtn)
+                myTr.appendChild(delTd)
+
+
+            }
+        } 
+        function clearForm(person){
+            for(a in person){
+                if(a == "fname" || a == "states"){
+                    document.getElementById(a).value=""
+                }else if(a == "gender"){
+                    rbuttons.forEach((rBtn)=>{
+                        rBtn.checked=false
+                    })
+                }else  if(a == "cities"){
+                    allCheckBoxes.forEach(function(cBox){
+                        cBox.checked=false
+                    })
+                }
+            }
+        }        
+        function editUser(i){
+            document.getElementById("updateBtn").style.display="block"
+        document.getElementById("addBtn").style.display="none"
+            gIndex=i;
+            var selectedUser=users[i]
+            for(a in selectedUser){
+                if(a == "fname" || a == "states"){
+                    document.getElementById(a).value=selectedUser[a]
+                }else if(a == "gender"){
+                    rbuttons.forEach((rBtn)=>{
+                        if(rBtn.value == selectedUser[a]){
+                            rBtn.checked=true
+                        }
+                    })
+                }else if(a =="cities"){
+                    allCheckBoxes.forEach(function(cBox){
+                        selectedUser[a].forEach((val)=>{
+                            if(cBox.value == val){
+                                cBox.checked=true
+                            }
+                        })
+
+                        
+                    })
+                }
+            }
+        }
+    //     function deleteUser(i){
+    //         users.splice(i,1) 
+    //         displayUserTable()
+           
+    //   }
+
+      function deleteUser(i) {
+  document.getElementById("userTable").deleteRow(0);
+}
+      function updateUser(){
+        var person=setUserFormInfo()
+        users[gIndex]=person
+        displayUserTable();
+        document.getElementById("updateBtn").style.display="none"
+        document.getElementById("addBtn").style.display="block"
+        clearForm(person)
+      }
+    </script>
+</body>
+</html>
