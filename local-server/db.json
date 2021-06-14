@@ -1,24 +1,9 @@
 {
   "Users": [
     {
-      "fname": "Dinesh",
-      "lname": "Kumar",
-      "id": 3
-    },
-    {
       "fname": "Gagan",
-      "lname": "Reddy M",
+      "lname": "Reddy ",
       "id": 4
-    },
-    {
-      "fname": "sai",
-      "lname": "prathap",
-      "id": 5
-    },
-    {
-      "fname": "Murali",
-      "lname": "Krishna Solutions",
-      "id": 6
     },
     {
       "fname": "Hemanth",
@@ -29,6 +14,16 @@
       "fname": "Jaideep ",
       "lname": "Reddy",
       "id": 9
+    },
+    {
+      "fname": "Murali",
+      "lname": "Krishna",
+      "id": 10
+    },
+    {
+      "fname": "Dinesh",
+      "lname": "Kumar",
+      "id": 11
     }
   ]
 }
