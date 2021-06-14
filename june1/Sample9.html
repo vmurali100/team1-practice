@@ -1,0 +1,16 @@
+function updateUser(){
+    for(a in newObj){
+     //   if(a !== "id"){
+        newObj[a] = document.getElementById(a).value
+     
+     }
+ var getData = new XMLHttpRequest();
+      getData.onreadystatechange = function(){
+          if(getData.readyState == 4 & getData.status ==200){
+             getUserDetailsFromServer()
+          }
+      }
+      getData.open("PUT", "http://localhost:3000/users/"+ newObj.id);
+      getData.setRequestHeader("content-type",'application/json');
+      getData.send(JSON.stringify(newObj)) 
+ }
