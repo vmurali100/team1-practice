@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+    <link rel="stylesheet" href="Telegramlogin.css">
+    <!-- <style>
+        div#divtext{
+            height: 100vh;
+            display: grid;
+            place-items: center;
+        }
+    </style> -->
+</head>
+<body>
+    <div>
+        <img  src="Telegram logo.jpeg" alt="Telegram logo">
+    </div>
+    <div id="divtext">
+        <h3>Connecting...</h3>
+        <h4>Please Confirm your country code and enter your phone number.</h4><br>
+        <label for="fname">Name</label><br>
+        <input type="text" name="fname" id="fname"><br><br>
+        <label for="country">Country</label><br>
+        <select name="countrys" id="count"  >
+            <option value="india">India</option>
+            <option value="america">Amerika</option>
+            <option value="malaysiya">malaysiya</option>
+        </select><br><br>
+        <label for="number">phone Number</label><br>
+        <input id="num" type="number" placeholder="Enter your mobile number"><br><br>
+         <input type="checkbox">
+         <label id="ct" for="text">keep me singed in</label><br><br>
+         <button onclick="login()" type="button" id="lbtn">login In </button>
+         <button type="button" onclick="updateuser()" style="display: none;" id="ubtn">Update</button>
+        </div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Country</th>
+                    <th>Contact Number</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody id="myTbody"></tbody>
+        </table>
+    
+    <script>
+        var user=[];
+        function login(){
+            var person=
+                userinfo();
+                displaytable();
+                clearForm(person);
+                user.push(person)
+                // console.log(person)
+            
+        }
+        function userinfo(){
+            var person={
+                fname:"",
+                count:"",
+                num:""
+            
+            }
+            person.fname=document.getElementById("fname").value
+            person. num=document.getElementById("num").value
+                person. count=document.getElementById("count").value
+            return(person)
+        }
+        function displaytable(){
+            document.getElementById("myTbody").innerHTML="";
+            for(i=0;i<user.length;i++){
+                var myTr=document.createElement("tr")
+                for(a in user[i]){
+                    var myTd=document.createElement("td")
+                    myTd.innerHTML=user[i][a]
+                    myTr.appendChild(myTd)
+                }
+                document.getElementById("myTbody").appendChild(myTr)
+
+                var editTd=document.createElement("td")
+                var editBtn=document.createElement("button")
+                editBtn.innerHTML="Edit"
+                editBtn.setAttribute("onclick","edituser("+i+")")
+                editTd.appendChild(editBtn)
+                myTr.appendChild(editTd)
+
+
+                var delTd=document.createElement("td")
+                var delBtn=document.createElement("button")
+                delBtn.innerHTML="Delete"
+                delBtn.setAttribute("onclick","deleteuser("+i+")")
+                delTd.appendChild(delBtn)
+                myTr.appendChild(delTd)
+            }
+        }
+         function edituser(i){
+             document.getElementById("lbtn").style.display="none"
+             document.getElementById("ubtn").style.display="block"
+             gIndex=i;
+             var selectedusers=user[i]
+             for(a in selectedusers){
+                 if(a=="fname" || a=="count" || a=="num"){
+                     document.getElementById(a).value=selectedusers[a]
+                    
+                 }
+             }
+         }
+         function updateuser(){
+             var person=userinfo()
+             user[gIndex]=person
+             displaytable()
+             document.getElementById("lbtn").style.display="block"
+             document.getElementById("ubtn").style.display="none"
+            clearForm(person)
+         }
+          function deleteuser(i){
+              document.getElementById("myTbody").deleteRow(0);
+          }
+        function clearForm(person){
+            for(a in person){
+                if(a == "num" || a== "count" || a=="fname"){
+                    document.getElementById(a).value=""
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>
