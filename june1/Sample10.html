@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="demo"></ul>
+    <script>
+        function getDataFromServer(){
+            return new Promise(function(success,failure){
+                var getData = new XMLHttpRequest();
+                getData.onreadystatechange = function(){
+                    if(getData.readyState == 4 && getData.status == 200){
+                        var users = JSON.parse(getData.response)
+                        displayData(users)
+                    }
+                }
+                getData.open("GET","http://localhost:3000/users")
+                getData.send()
+            })
+        }
+        function displayData(users){
+            document.getElementById("demo").innerHTML = " "
+            users.forEach((user,i)=>{
+            var myli = document.createElement("li");
+            myli.innerHTML = user.fname + " " + user.lname +"<button>Edit</button> <button>Delete</button>"
+            document.getElementById("demo").appendChild(myli)
+            })
+        }
+
+        async function gettingAllData(){
+           var  user = await getDataFromServer()
+            displayData(users)
+        }
+        gettingAllData()
+    </script>
+</body>
+</html>
