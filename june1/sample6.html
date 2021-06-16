@@ -24,28 +24,40 @@
         }
 
 
-        function gettingDataFromServer(displayAllUsers) { 
+        function gettingDataFromServer() { 
             var getData = new XMLHttpRequest();
             getData.onreadystatechange = function () {
                 if (getData.readyState == 4 && getData.status == 200) {
                     users = JSON.parse(getData.response)
-                    displayAllUsers()
+                    displayAllUsers(users)
                 }
             }
             getData.open("GET", "http://localhost:3000/users")
             getData.send()
 
         }
-        function deleteDataFromServer(){
+        function deleteDataFromServer(users){
             var deleteData =  new XMLHttpRequest();
+            deleteData.onreadystatechange = function(){
+                if(deleteData.readyState == 4 && deleteData.status == 200){
+                   users= JSON.parse(deleteData.response)
+                   displayAllUsers(users)
+                    console.log("data deleted successfully")
+                }
+            }
+            deleteData.open("DELETE","http://localhost:3000/users/"+ users.id);
+            deleteData.send()
             
         }
 
-        function displayAllUsers() {
+        function editUser(i){
+            console.log(i)
+        }
+        function displayAllUsers(users) {
             document.querySelector("ul").innerHTML = ""
             users.forEach((user, i) => {
                 var li = document.createElement("li")
-                li.innerHTML = user.fname + " <button onclick='editUser(" + i + ")'>Edit</button><button onclick='deleteUser(" + user.id + ")'>Delete</button>"
+                li.innerHTML = user.fname + " <button onclick='editUser(" + i + ")'>Edit</button><button onclick='deleteUser(" + users.id + ")'>Delete</button>"
                 document.querySelector("ul").appendChild(li)
             })
         }

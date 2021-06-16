@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" name="name" onkeyup="clickHere()"> <br> <br>
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" name="name" onkeyup="clickHere1()"> <br> <br>
+        <label for="gender">Gender</label> <br>
+        <input type="radio" id="gender" name="gender" value="Female"> Female
+        <input type="radio" id="gender" name="gender" value="Male">Male <br> <br>
+        <label for="cities">Cities</label> <br>
+        <input type="checkbox"  name="cities" value="Bangalore">Bangalore <br>
+        <input type="checkbox"  name="cities" value="Tirupati">Tirupati <br>
+        <input type="checkbox" name="cities" value="chittoor"> chittoor <br>
+        <input type="checkbox" name="cities" value="hyderabad"> hyderabad <br>
+        <br> <br>
+        <label for="states">states</label>
+        <select name="states" id="states">
+            <option value=""></option>
+            <option value="telangana">Telangana</option>
+            <option value="mumbai">Mumbai</option>
+            <option value="karnataka">Karnataka</option>
+            <option value="tamilNade">TamilNadu</option>
+            <option value="kerala">Kerala</option>
+            <option value="andhraPradesh">AndhraPradesh</option>
+
+        </select> 
+        <br> <br>
+
+        <button disabled type="button" name="submit" onclick="addUser()">Add User</button>
+        <button  type="button" name="submit" onclick="Update()">Update</button>
+    </form>
+      
+    <table border="2">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Cities</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="myBody"></tbody>
+    </table>
+    <script>
+        //   var rbuttons = document.getElementsByName("gender").value
+        //   var cBoxes = document.getElementsByName("cities").value
+        
+        function clickHere(){
+            var checkName1 = document.getElementById("fname").value
+            if(checkName1.length >= 7){
+                document.querySelector("button").removeAttribute("disabled")
+            }else {
+                document.querySelector("button").setAttribute("disabled", true)
+            }
+            console.log(checkName1)
+        }
+        function clickHere1(){
+            var checkName2 = document.getElementById("lname").value
+            if(checkName2.length >= 7){
+                document.querySelector("button").removeAttribute("disabled")
+            }else {
+                document.querySelector("button").setAttribute("disabled", true)
+            }
+            console.log(checkName2)
+        }
+    
+     function addUser(){
+        var person ={
+            fname:" ",
+            lname: " ",
+            gender: " ",
+            cities:" ",
+            states:" "
+        }
+        person.fname = document.getElementById("fname").value
+        person.lname = document.getElementById("lname").value
+
+        //for radio button
+        var rbuttons = document.getElementsByName("gender")
+        for(i=0;i<rbuttons.length;i++){
+               if(rbuttons[i].checked == true){
+                   person.gender=rbuttons[i].value
+               }
+               }
+
+         //for checkbox's
+        //  var cBoxes = document.getElementsByName("cities").value
+        //  var checkedValues=[];
+        //        for(i=0;i<cBoxes.length;i++){
+        //            if(cBoxes[i].checked == true){
+        //                checkedValues.push(cBoxes[i].value)
+        //            }
+        //        }
+        //  person.cities = checkedValues;
+
+        person.states = document.getElementById("states").value
+        
+       console.log(person)
+    }
+    </script>
+</body>
+</html>
