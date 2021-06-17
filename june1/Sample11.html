@@ -34,8 +34,8 @@
         </select> 
         <br> <br>
 
-        <button disabled type="button" name="submit" onclick="addUser()">Add User</button>
-        <button  type="button" name="submit" onclick="Update()">Update</button>
+        <button disabled type="button" name="submit" id="addBtn" onclick="addUser()">Add User</button>
+        <button  type="button" name="submit" style="display: none;" id="updateBtn" onclick="Update()">Update</button>
     </form>
       
     <table border="2">
@@ -45,15 +45,17 @@
                 <th>Last Name</th>
                 <th>Gender</th>
                 <th>Cities</th>
+                <th>States</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
         </thead>
         <tbody id="myBody"></tbody>
     </table>
+    <div id="mydiv"></div>
     <script>
-        //   var rbuttons = document.getElementsByName("gender").value
-        //   var cBoxes = document.getElementsByName("cities").value
+          var rbuttons = document.getElementsByName("gender")
+          var cBoxes = document.getElementsByName("cities")
         
         function clickHere(){
             var checkName1 = document.getElementById("fname").value
@@ -74,7 +76,17 @@
             console.log(checkName2)
         }
     
+        var users = [];
      function addUser(){
+        var person = setFormInfo();
+        users.push(person)
+        clearForm(person)
+        displayTable()
+       console.log(person)
+    }
+
+    // for update purpose we are creating setFormInfo
+    function setFormInfo(){
         var person ={
             fname:" ",
             lname: " ",
@@ -86,7 +98,7 @@
         person.lname = document.getElementById("lname").value
 
         //for radio button
-        var rbuttons = document.getElementsByName("gender")
+        // var rbuttons = document.getElementsByName("gender")
         for(i=0;i<rbuttons.length;i++){
                if(rbuttons[i].checked == true){
                    person.gender=rbuttons[i].value
@@ -94,18 +106,104 @@
                }
 
          //for checkbox's
-        //  var cBoxes = document.getElementsByName("cities").value
-        //  var checkedValues=[];
-        //        for(i=0;i<cBoxes.length;i++){
-        //            if(cBoxes[i].checked == true){
-        //                checkedValues.push(cBoxes[i].value)
-        //            }
-        //        }
-        //  person.cities = checkedValues;
+        //  var cBoxes = document.getElementsByName("cities")
+         var checkedValues=[];
+               for(i=0;i<cBoxes.length;i++){
+                   if(cBoxes[i].checked == true){
+                       checkedValues.push(cBoxes[i].value)
+                   }
+               }
+         person.cities = checkedValues;
 
         person.states = document.getElementById("states").value
+
+        return person
+    }
+
+    function displayTable(){
+         document.getElementById("myBody").innerHTML = " "
+         for(i=0;i<users.length;i++){
+           var mytr = document.createElement("tr");
+           for(a in users[i]){
+               var mytd = document.createElement("td");
+               mytd.innerHTML = users[i][a]
+               mytr.appendChild(mytd)
+           }
+
+           var editTd = document.createElement("td")
+           var editBtn = document.createElement("button");
+             editBtn.innerHTML = "Edit";
+             editBtn.setAttribute("onclick", "editUser(" +i+ ")")
+             editTd.appendChild(editBtn)
+             mytr.appendChild(editTd)
+
+           var deleteTd = document.createElement("td");
+           var deleteBtn = document.createElement("button")
+               deleteBtn.innerHTML = "DELETE";
+               deleteBtn.setAttribute("onclick", "deleteUser("+i+")")
+               deleteTd.appendChild(deleteBtn)
+               mytr.appendChild(deleteTd) 
         
-       console.log(person)
+         document.getElementById("myBody").appendChild(mytr)
+         }
+    
+    }
+    function clearForm(person){
+        for(a in person){
+            if(a == "fname" || a == "lname" || a == "states"){
+                document.getElementById(a).value = " "
+            }else if(a == "gender"){
+            rbuttons.forEach((rbtn)=>{
+                rbtn.checked = false
+            })  
+            }else if(a == "cities"){
+                cBoxes.forEach((cboxes1)=>{
+                    cboxes1.checked = false
+                })
+            }
+        }
+
+    }
+    function editUser(i){
+        gIndex = i // we need to use this one in update user so we are creating gIndex
+        
+        document.getElementById("addBtn").style.display = "none"
+        document.getElementById("updateBtn").style.display = "block"
+        
+        var selectedUser = users[i]
+        for(a in selectedUser){
+            if(a == "fname" || a == "lname" || a == "states"){
+                document.getElementById(a).value = selectedUser[a]
+            } else if(a == "gender"){
+                rbuttons.forEach((rbtn)=>{
+                    if(rbtn.value == selectedUser[a]){
+                        rbtn.checked = true
+                    }
+                })
+            }else if(a == "cities"){
+                cBoxes.forEach((cboxes2)=>{
+                    selectedUser[a].forEach((val2)=>{
+                        if(cboxes2.value == val2){
+                            cboxes2.checked = true
+                        }
+                    })
+                })
+            }
+        }
+        console.log(i);
+    }
+    function deleteUser(i){
+        users.splice(i,1)
+        displayTable()
+        console.log(i)
+    }
+    function Update(){
+      var person = setFormInfo();
+      users[i] = person;
+      displayTable();
+      document.getElementById("addBtn").style.display = "block"
+      document.getElementById("updateBtn").style.display = "none"
+     clearForm(person)
     }
     </script>
 </body>
