@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="demo"></h1>
+    <script>
+        //this keyword
+        //this keyword is use refers to the object it belongs to it 
+
+        // var per1={
+        //     name:"saranya",
+        //     age:12,
+        //     id:113232,
+        //     full:function(){
+        //         console.log(this.name + "\n" +this.age +"\n"+ this.id);
+        //     }
+        // }
+        // document.getElementById("demo").innerHtml=per1.full()
+
+
+        //call it takes the value as string formate 
+          var per1 ={
+              fullname:function(id,code){
+                  console.log(this.name + "\n" + this.last + "\n" + this.age +"\n"+id+"\n"+code)
+              }
+          }
+
+          var per2={
+              name:"saranya",
+              last:"jettigundla",
+              age:18
+          }
+          console.log(per1.fullname.call(per2,"saranya","jettigundla",12334","542711"))
+          document.getElementById("demo").innerHTML = per1.fullname.call(per2,"123345","5427111")
+
+    </script>
+</body>
+</html>
